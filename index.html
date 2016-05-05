@@ -1,0 +1,50 @@
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <title>CMW</title>
+    
+    <link rel="shortcut icon" href="">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>body{padding-top:50px;}.starter-template{padding:40px 15px;text-align:center;}</style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/module.js"></script>
+    </head>
+
+    
+    
+    
+    
+    
+    
+<body ng-app="app">
+    <div class="container" ng-controller="MainController">
+        <form name="carsForm" novalidate>
+            <div class="row" >
+                <label>Choose your car: </label>
+                <select class="form-control" id="carsListbox" ng-options="car.name for car in carsList" ng-model="carsListbox"  ng-required="true"></select>
+            </div>
+            <div class="row">
+                <label>Choose your date: </label>
+                <select class="form-control" id="timeslotsListbox" ng-options="timeslots.date + ' | ' + timeslots.time disable when timeslots.reserved for timeslots in timeslotsList | filter:{ carId : carsListbox.id }" ng-disabled="carsListbox == undefined" ng-model="timeslotListbox"  ng-required="true"></select>
+            </div>
+            <div class="row">
+                <label>Enter your email: </label>
+                <input type="text" name="email" class="form-control" ng-model="email" placeholder="example@example.com" ng-pattern="/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/"  ng-required="true" >
+            </div>
+            <div class="row">
+                <input type="submit" ng-disabled="carsForm.$invalid" class="btn btn-primary" ng-click="reserveCar(email)" Value="Reserve car">
+            </div>
+        </form>
+    </div>
+</body>
